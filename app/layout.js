@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
                   <Link className="nav-link" href="/">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/services">Services</Link>
+                  <Link className="nav-link" href="/">Services</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/booking">Booking</Link>

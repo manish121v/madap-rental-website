@@ -1,3 +1,5 @@
+"use client";
+
 const gateEntryFiles = [
   "/gate and entry/00748a94-9ca2-41d4-800b-cb971f6dfb58.JPG",
   "/gate and entry/02db89db-85d6-4346-82fa-424cda80f7c3.JPG",
@@ -199,29 +201,48 @@ const gateEntryFiles = [
 ];
 
 function isVideo(file) {
-  return file.match(/\.(mp4|mov|avi|mkv)$/i);
-}
-
-export default function GateEntryGallery() {
-  return (
-    <div className="container py-5">
-      <h1 className="display-5 fw-bold text-center mb-4">Gate & Entry Gallery</h1>
-      <div className="row g-3">
-        {gateEntryFiles.map((src, idx) => (
-          <div className="col-12 col-md-4 col-lg-3" key={idx}>
-            <div className="card h-100 shadow-sm border-0">
-              {isVideo(src) ? (
-                <video controls width="100%" style={{ borderRadius: '0.5rem' }}>
-                  <source src={src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <img src={src} alt={`Gate & Entry ${idx + 1}`} className="img-fluid rounded" style={{ cursor: 'pointer' }} />
-              )}
+    return /\.(mp4|mov|avi|mkv)$/i.test(file);
+  }
+  
+  export default function GateEntryGallery() {
+    return (
+      <div className="container py-5">
+        <h1 className="display-5 fw-bold text-center mb-4">Gate & Entry Gallery</h1>
+        <div className="row g-3">
+          {gateEntryFiles.map((src, idx) => (
+            <div className="col-12 col-md-4 col-lg-3" key={idx}>
+              <div
+                className="card h-100 shadow-sm border-0"
+                style={{ transition: "transform 0.2s", cursor: "pointer" }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              >
+                {isVideo(src) ? (
+                  <video
+                    controls
+                    width="100%"
+                    controlsList="nodownload"
+                    style={{ borderRadius: "0.5rem" }}
+                  >
+                    <source
+                      src={src}
+                      type={`video/${src.split(".").pop().toLowerCase()}`}
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img
+                    src={src}
+                    loading="lazy"
+                    alt={`Gate and Entry image ${idx + 1}`}
+                    className="img-fluid rounded"
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
-} 
+    );
+  }
+  

@@ -1,3 +1,4 @@
+"use client";
 const mheFiles = [
   "/mehendi-haldi-engagement/05296e8f-6f8f-4a3c-a577-ac4a32fbf9f7 2.JPG",
   "/mehendi-haldi-engagement/075bb526-454d-4530-8756-e9475ae53fb5 2.JPG",
@@ -83,25 +84,45 @@ function isVideo(file) {
 }
 
 export default function MehendiHaldiEngagementGallery() {
-  return (
-    <div className="container py-5">
-      <h1 className="display-5 fw-bold text-center mb-4">Mehendi, Haldi & Engagement Gallery</h1>
-      <div className="row g-3">
-        {mheFiles.map((src, idx) => (
-          <div className="col-12 col-md-4 col-lg-3" key={idx}>
-            <div className="card h-100 shadow-sm border-0">
-              {isVideo(src) ? (
-                <video controls width="100%" style={{ borderRadius: '0.5rem' }}>
-                  <source src={src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <img src={src} alt={`Mehendi, Haldi & Engagement ${idx + 1}`} className="img-fluid rounded" style={{ cursor: 'pointer' }} />
-              )}
+    return (
+      <div className="container py-5">
+        <h1 className="display-5 fw-bold text-center mb-4">
+          Mehendi, Haldi & Engagement Gallery
+        </h1>
+        <div className="row g-3">
+          {mheFiles.map((src, idx) => (
+            <div className="col-12 col-md-4 col-lg-3" key={idx}>
+              <div
+                className="card h-100 shadow-sm border-0"
+                style={{
+                  transition: 'transform 0.2s',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+              >
+                {isVideo(src) ? (
+                  <video
+                    controls
+                    width="100%"
+                    preload="none"
+                    style={{ borderRadius: '0.5rem' }}
+                  >
+                    <source src={src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img
+                    src={src}
+                    alt={`Mehendi, Haldi & Engagement ${idx + 1}`}
+                    className="img-fluid rounded"
+                    loading="lazy"
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
-} 
+    );
+  }

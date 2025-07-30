@@ -1,3 +1,4 @@
+"use client";
 const mahiraImages = [
   "/Mahira/03858392-c74f-48e2-b90a-d2b8546abb5e.JPG",
   "/Mahira/0411e558-6aca-4bf3-b2f7-9fab8ccf376c.JPG",
@@ -62,12 +63,22 @@ export default function MahiraGallery() {
       <div className="row g-3">
         {mahiraImages.map((src, idx) => (
           <div className="col-6 col-md-3" key={idx}>
-            <div className="card h-100 shadow-sm border-0">
-              <img src={src} alt={`Mahira ${idx + 1}`} className="img-fluid rounded" style={{ cursor: 'pointer' }} />
+            <div
+              className="card h-100 shadow-sm border-0"
+              style={{ transition: 'transform 0.2s', cursor: 'pointer' }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            >
+              <img
+                src={src}
+                alt={`Mahira ${idx + 1}`}
+                loading="lazy"
+                className="img-fluid rounded"
+              />
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-} 
+}

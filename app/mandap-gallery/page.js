@@ -1,3 +1,4 @@
+"use client";
 const mandapFiles = [
   "/mandap/00b78c03-e538-4a5f-81b0-8d866e8c516e.JPG",
   "/mandap/01527653-5e21-4461-a729-37870b120989.JPG",
@@ -304,29 +305,44 @@ const mandapFiles = [
 ];
 
 function isVideo(file) {
-  return file.match(/\.(mp4|mov|avi|mkv)$/i);
-}
-
-export default function MandapGallery() {
-  return (
-    <div className="container py-5">
-      <h1 className="display-5 fw-bold text-center mb-4">Mandap Gallery</h1>
-      <div className="row g-3">
-        {mandapFiles.map((src, idx) => (
-          <div className="col-12 col-md-4 col-lg-3" key={idx}>
-            <div className="card h-100 shadow-sm border-0">
-              {isVideo(src) ? (
-                <video controls width="100%" style={{ borderRadius: '0.5rem' }}>
-                  <source src={src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <img src={src} alt={`Mandap ${idx + 1}`} className="img-fluid rounded" style={{ cursor: 'pointer' }} />
-              )}
+    return /\.(mp4|mov|avi|mkv)$/i.test(file);
+  }
+  
+  export default function MandapGallery() {
+    return (
+      <div className="container py-5">
+        <h1 className="display-5 fw-bold text-center mb-4">Mandap Gallery</h1>
+        <div className="row g-3">
+          {mandapFiles.map((src, idx) => (
+            <div className="col-12 col-md-4 col-lg-3" key={idx}>
+              <div
+                className="card h-100 shadow-sm border-0"
+                style={{ transition: 'transform 0.2s', cursor: 'pointer' }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+              >
+                {isVideo(src) ? (
+                  <video
+                    controls
+                    width="100%"
+                    style={{ borderRadius: '0.5rem' }}
+                    preload="none"
+                  >
+                    <source src={src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img
+                    src={src}
+                    alt={`Mandap ${idx + 1}`}
+                    className="img-fluid rounded"
+                    loading="lazy"
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
-} 
+    );
+  }

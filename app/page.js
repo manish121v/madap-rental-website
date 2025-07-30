@@ -1,44 +1,41 @@
 "use client";
 import { useEffect } from "react";
+import Link from "next/link"; 
 import Image from "next/image";
 import AOS from "aos";
+import FolderSlider from "./component/FolderSlider";
 
 const services = [
   {
     name: "Mahira",
+    slug: "mahira",
     description: "Custom setups for Mahira functions.",
-    image: "https://picsum.photos/seed/mahira/400/250"
   },
   {
     name: "Madap",
+    slug: "mandap",
     description: "Elegant Madap designs to match your theme.",
-    image: "https://picsum.photos/seed/madap/400/250"
   },
   {
     name: "Mehendi",
+    slug: "mehendi-haldi-engagement",
     description: "Beautiful decor for Mehendi ceremonies.",
-    image: "https://picsum.photos/seed/mehendi/400/250"
   },
   {
     name: "Haldi",
+    slug: "mehendi-haldi-engagement",
     description: "Vibrant Haldi function setups.",
-    image: "https://picsum.photos/seed/haldi/400/250"
   },
   {
     name: "Engagement",
+    slug: "mehendi-haldi-engagement",
     description: "Stylish engagement event decor.",
-    image: "https://picsum.photos/seed/engagement/400/250"
   },
   {
     name: "Gate & Entry Decor",
+    slug: "gate and entry",
     description: "Welcoming gate and entry decorations.",
-    image: "https://picsum.photos/seed/gate/400/250"
   },
-  {
-    name: "Coolers",
-    description: "Cooler rentals for summer comfort.",
-    image: "https://picsum.photos/seed/coolers/400/250"
-  }
 ];
 
 const whyChooseUs = [
@@ -126,21 +123,17 @@ export default function Home() {
         <div className="row g-4">
           {services.map((service, idx) => (
             <div className="col-md-4" key={idx} data-aos="fade-up" data-aos-delay={idx * 100}>
+              <Link href={`/${service.slug}-gallery`} className="text-decoration-none text-dark">
               <div className="card h-100 shadow-sm border-0">
-            <Image
-                  src={service.image}
-                  alt={service.name}
-                  width={400}
-                  height={250}
-                  className="card-img-top"
-                  style={{ objectFit: 'cover', height: '250px' }}
-                  unoptimized
-                />
+              <div className="card-img-top" style={{ height: '250px', overflow: 'hidden' }}>
+  <FolderSlider slug={service.slug} width={400} height={250} />
+</div>
                 <div className="card-body">
                   <h5 className="card-title">{service.name}</h5>
                   <p className="card-text">{service.description}</p>
                 </div>
               </div>
+              </Link>
             </div>
           ))}
         </div>
