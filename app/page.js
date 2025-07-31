@@ -33,7 +33,7 @@ const services = [
   },
   {
     name: "Gate & Entry Decor",
-    slug: "gate and entry",
+    slug: "gate-entry",
     description: "Welcoming gate and entry decorations.",
   },
 ];
